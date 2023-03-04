@@ -188,8 +188,7 @@ li.ProseMirror-selectednode:after {
 .ProseMirror-icon {
   display: inline-block;
   line-height: 0.8;
-  vertical-align: -2px;
-  /* Compensate for padding */
+  vertical-align: -2px; /* Compensate for padding */
   padding: 2px 8px;
   cursor: pointer;
 }

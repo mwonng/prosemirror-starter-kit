@@ -67,6 +67,9 @@ export function buildKeymap(schema, mapKeys) {
   if (type = schema.marks.code)
     bind("Mod-`", toggleMark(type))
 
+  if (type = schema.marks.s) 
+    bind("Shift-b", toggleMark(type))
+
   if (type = schema.nodes.bullet_list)
     bind("Shift-Ctrl-8", wrapInList(type))
   if (type = schema.nodes.ordered_list)

@@ -4,6 +4,7 @@
     import {schema} from "./schema"
     import {addListNodes} from "prosemirror-schema-list"
     import {exampleSetup} from "./customSetup"
+    import {myPlugin} from './plugins/myPlugin'
     import '../css/prose.css'
     import '../css/mystyles.scss'
     var pretty = require('pretty')
