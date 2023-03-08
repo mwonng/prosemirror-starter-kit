@@ -39,6 +39,15 @@ export const nodes = {
     toDOM() { return hrDOM }
   },
 
+  strongTextNode: {
+    inline: true,
+    group: "inline", // set the node group
+    content: "text*", // set the node content to text
+    // marks: strong ? [strong] : [], // set the node marks to the strong mark type
+    parseDOM: [{ tag: "strong" }], // specify how to parse the node from the DOM
+    toDOM() { return ["strong", 0] }, // specify how to render the node to the DOM
+  },
+
   // :: NodeSpec A heading textblock, with a `level` attribute that
   // should hold the number 1 to 6. Parsed and serialized as `<h1>` to
   // `<h6>` elements.
@@ -72,6 +81,20 @@ export const nodes = {
   // :: NodeSpec The text node.
   text: {
     group: "inline"
+  },
+
+  bold: {
+    attrs: {},
+    inline: true,
+    group: "inline",
+    content: "text*",
+    parseDOM: [
+      {
+        tag: "strong",
+        getAttrs: () => ({}),
+      },
+    ],
+    toDOM: () => ["strong", "???", 0],
   },
 
   // :: NodeSpec An inline image (`<img>`) node. Supports `src`,
@@ -108,8 +131,7 @@ export const nodes = {
 
 const emDOM = ["em", 0], 
       strongDOM = ["strong", 0], 
-      codeDOM = ["code", 0],
-      strikeDOM = ["span", {style: "font-weight:bold", class: "bold-container"}, ["span", "**"], ["strong",0], ["span", "**"]]
+      codeDOM = ["code", 0]
 //<s>paragraph in a numbered list</s>
 
 // :: Object [Specs](#model.MarkSpec) for the marks in the schema.
@@ -134,11 +156,6 @@ export const marks = {
   em: {
     parseDOM: [{tag: "i"}, {tag: "em"}, {style: "font-style=italic"}],
     toDOM() { return emDOM }
-  },
-
-  s: {
-    parseDOM: [{tag: "s"}, {style: "text-decoration=line-through"}],
-    toDOM() { return strikeDOM }
   },
 
   // :: MarkSpec A strong mark. Rendered as `<strong>`, parse rules
